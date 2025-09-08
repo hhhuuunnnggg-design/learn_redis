@@ -1,0 +1,4 @@
+Mở vỏ trong hộp đựng của Redis
+*Docker exec -it redis bash     (mở bash trong container redis)
+* redis-cli     (hạy redis-cli (công cụ client để nói chuyện với Redis server))
+*ping (check tương tác với máy chủ)
