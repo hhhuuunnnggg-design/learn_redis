@@ -29,8 +29,12 @@ public class CityService {
     public Mono<City> getCity(final String zipCode) {
         // return this.cityMap.get(zipCode)
         // .onErrorResume(ex -> this.cityClient.getCity(zipCode));
+
+        // đây là code thủ công, chứa nhiều logic, nếu không muốn code thủ công thì thêm
+        // @Cacheable vào method getCity
         return this.cityMap.get(zipCode).switchIfEmpty(
-                this.cityClient.getCity(zipCode).flatMap(C -> this.cityMap.fastPut(zipCode, C).thenReturn(C)));
+                this.cityClient.getCity(zipCode) // tìm dữ liệu trong Redis map (nếu có).
+                        .flatMap(C -> this.cityMap.fastPut(zipCode, C).thenReturn(C))); // tự push dữ liệu vào redis map
     }
 
     // @Scheduled(fixedRate = 10_000)
