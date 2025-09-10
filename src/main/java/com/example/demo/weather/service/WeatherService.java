@@ -20,7 +20,7 @@ public class WeatherService {
         return 0;
     }
 
-    @Scheduled(fixedRate = 5_000) // chạy 10s một lần
+    // @Scheduled(fixedRate = 5_000) // chạy 10s một lần
     public void update() {
         System.out.println("updating weather");
         IntStream.rangeClosed(1, 5)
